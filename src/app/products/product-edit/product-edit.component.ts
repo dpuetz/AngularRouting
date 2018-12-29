@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from '../../messages/message.service';
 
-import { Product } from '../product';
+import { Product, ProductResolved } from '../product';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -17,27 +17,38 @@ export class ProductEditComponent implements OnInit {
 
   product: Product;
 
-  constructor(private productService: ProductService,
+    constructor(private productService: ProductService,
               private messageService: MessageService,
               private router: ActivatedRoute,
-              private routeNav: Router) { }
+              private routeNav: Router) {
+        this.router.data.subscribe(data => {
+            const resolveData: ProductResolved = this.router.snapshot.data['resolvedData'];
+            this.errorMessage = resolveData.error;
+            this.onProductRetrieved( resolveData.product);
+        });
+    }
 
-  ngOnInit() {
-    this.router.paramMap.subscribe( params => {
-        const id = +params.get('id');
-        if (!isNaN(id)) {
-            this.getProduct(id);
-        }
-    });
-  }
+    ngOnInit() {
 
-  getProduct(id: number): void {
-    this.productService.getProduct(id)
-      .subscribe(
-        (product: Product) => this.onProductRetrieved(product),
-        (error: any) => this.errorMessage = <any>error
-      );
-  }
+    }
+
+    // don't need this after we started used the route resolver
+//   ngOnInit() {
+//     this.router.paramMap.subscribe( params => {
+//         const id = +params.get('id');
+//         if (!isNaN(id)) {
+//             this.getProduct(id);
+//         }
+//     });
+//   }
+
+//   getProduct(id: number): void {
+//     this.productService.getProduct(id)
+//       .subscribe(
+//         (product: Product) => this.onProductRetrieved(product),
+//         (error: any) => this.errorMessage = <any>error
+//       );
+//   }
 
   onProductRetrieved(product: Product): void {
     this.product = product;
