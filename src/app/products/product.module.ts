@@ -12,8 +12,10 @@ import { ProductEditTagsComponent } from './product-edit/product-edit-tags.compo
 
 const routes: Routes = [
     {path: 'products', component: ProductListComponent},
+    
     {path: 'products/:id', component: ProductDetailComponent,
         resolve: {resolvedData: ProductResolver}},
+
     {   path: 'products/:id/edit',
         component: ProductEditComponent,
         resolve: {resolvedData: ProductResolver},

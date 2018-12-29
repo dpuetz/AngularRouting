@@ -18,6 +18,11 @@ div.card {
 .blueborder{border:solid 2px blue}
 .greenborder{border:solid 2px green}
 .orangeborder{border:solid 2px orange}
+
+.redborderRouter{border:solid 6px red}
+.greenborderRouter{border:solid 6px green}
+.blueborderRouter{border:solid 6px blue}
+
 .red{background-color: red}
 .blue{background-color: blue}
 .green{background-color: green}
