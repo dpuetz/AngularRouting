@@ -11,10 +11,18 @@ export class ProductEditInfoComponent implements OnInit {
   @ViewChild(NgForm) productForm: NgForm;
 
   errorMessage: string;
-  product = { id: 1, productName: 'test', productCode: 'test' };
+  product: Product;
+//   product = { id: 1, productName: 'test', productCode: 'test' };
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    // this.product = this.route.parent.snapshot.data['data']
+    this.route.parent.data.subscribe(data => {
+        if (this.productForm) {
+            this.productForm.reset();
+        }
+        this.product = data['resolvedData'].product;
+    });
   }
 }
