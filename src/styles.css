@@ -23,6 +23,8 @@ div.card {
 .greenborderRouter{border:solid 6px green}
 .blueborderRouter{border:solid 6px blue}
 
+.redborderRouterDashed{border:dashed 6px red}
+
 .red{background-color: red}
 .blue{background-color: blue}
 .green{background-color: green}
