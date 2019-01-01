@@ -1,0 +1,23 @@
+import { Injectable } from '@angular/core';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ProductEditComponent } from './product-edit.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductEditGuard implements CanDeactivate<ProductEditComponent> {
+  canDeactivate (component: ProductEditComponent,
+                currentRoute: ActivatedRouteSnapshot,
+                currentState: RouterStateSnapshot,
+                nextState?: RouterStateSnapshot): boolean {
+    if (component.isDirty) {
+console.log('a');
+        const productName = component.product.productName || 'New Product';
+        return confirm (`Navigate away and lose all changes to ${productName}?`);
+    }
+console.log('b');
+    return true;
+  }
+}
+
