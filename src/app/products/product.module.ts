@@ -9,15 +9,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductResolver } from './product-resolver.service';
 import { ProductEditInfoComponent } from './product-edit/product-edit-info.component';
 import { ProductEditTagsComponent } from './product-edit/product-edit-tags.component';
-import { AuthGuard } from '../user/auth.guard';
 import { ProductEditGuard } from './product-edit/product-edit.guard';
 
 
 
 const routes: Routes = [
-    {path: 'products',  //componentless route
-     canActivate: [AuthGuard],
-        children: [
+    // {path: '',  //componentless route
+    //  canActivate: [AuthGuard],
+    //     children: [
             {path: '', component: ProductListComponent },
             {path: ':id', component: ProductDetailComponent,
                 resolve: {resolvedData: ProductResolver},
@@ -32,7 +31,7 @@ const routes: Routes = [
                     {path: 'tags', component: ProductEditTagsComponent}
                 ]
             }
-        ]},
+        // ]},
 ];
 
 @NgModule({
